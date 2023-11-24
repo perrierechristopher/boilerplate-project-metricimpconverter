@@ -64,9 +64,7 @@ function ConvertHandler() {
     const unitEntries = Object.entries(allowedUnits);
 
     try {
-      initUnit
-      ? (result = initUnit)
-      : (() => {
+      (() => {
           unitEntries.forEach((entries) => {
             entries.forEach((entry, index) => {
               if (entry.toLowerCase() === initUnit.toLowerCase())
@@ -78,6 +76,7 @@ function ConvertHandler() {
       throw e
     }
     
+    console.log(result)
     return result;
   };
 
