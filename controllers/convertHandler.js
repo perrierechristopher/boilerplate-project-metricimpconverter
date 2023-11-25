@@ -56,15 +56,16 @@ function ConvertHandler() {
       if (found) return;
     }); 
 
-    return found ? result : Error('Invalid Unit');
+    return found ? (result.toLowerCase() === 'l' ? 'L' : result.toLowerCase()) : Error('Invalid Unit');
   };
 
   this.getReturnUnit = function (initUnit) {
-    let result;
+    let result = initUnit;
     const unitEntries = Object.entries(allowedUnits);
 
-    try {
-      (() => {
+      result instanceof Error
+      ? result = new Error('Invalid Unit')
+      : (() => {
           unitEntries.forEach((entries) => {
             entries.forEach((entry, index) => {
               if (entry.toLowerCase() === initUnit.toLowerCase())
@@ -72,11 +73,7 @@ function ConvertHandler() {
             });
           });
         })();
-    } catch (e) {
-      throw e
-    }
     
-    console.log(result)
     return result;
   };
 
@@ -99,7 +96,9 @@ function ConvertHandler() {
     if(!(initNum instanceof Error) && !(initUnit instanceof Error)) {
       Object.entries(converters).forEach((entry, index) => {
         if(entry[0].split('To').includes(initUnit.toLowerCase())) {
-          return entry[0].startsWith(initUnit.toLowerCase()) ? result = eval(initNum * entry[1]) : result = eval(initNum/entry[1])
+          entry[0].startsWith(initUnit.toLowerCase()) ? result = eval(initNum * entry[1]) : result = eval(initNum/entry[1])
+          let roundN = parseFloat(result.toFixed(5))
+          return result = roundN
         }
       })
     } else {
