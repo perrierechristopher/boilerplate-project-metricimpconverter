@@ -71,8 +71,7 @@ suite("Unit Tests", function () {
   });
 
   // test('ConvertHandler.getReturnUnit return the correct unit for each valid input unit', ()=>{
-  //     ['mi', convertHandler.getReturnUnit(convertHandler.getUnit('1km'))]
-  //     assert.equal()
+  //     assert.equal('mi', convertHandler.getReturnUnit(convertHandler.getUnit('1km')))
   // })
 
   test("ConvertHandler.spellOutUnit return the spelled-out string unit for each valid input unit", () => {
@@ -101,54 +100,51 @@ suite("Unit Tests", function () {
 
   test("ConvertHandler.convert should correctly convert L to gal", () => {
     assert.equal(
-      0,
+      0.52834,
       convertHandler.convert(
         convertHandler.getNum("2L"),
-        convertHandler.getUnit("2L"),
-        convertHandler.getReturnUnit("L")
-      ) %
-        (1 / converters["galTol"])
+        convertHandler.getUnit("2L")
+      )
     );
   });
 
   test("ConvertHandler.convert should correctly convert mi to km", () => {
     assert.equal(
-      0,
+      3.21868,
       convertHandler.convert(
         convertHandler.getNum("2mi"),
         convertHandler.getUnit("2mi")
-      ) % converters["miTokm"]
+      )
     );
   });
 
   test("ConvertHandler.convert should correctly convert km to mi", () => {
     assert.equal(
-      0,
+      1.24275,
       convertHandler.convert(
         convertHandler.getNum("2km"),
         convertHandler.getUnit("2km")
-      ) %
-        (1 / converters["miTokm"])
+      )
     );
   });
 
   test("ConvertHandler.convert should correctly convert lbs to kg", () => {
     assert.equal(
-      0,
+      1.36078,
       convertHandler.convert(
         convertHandler.getNum("3lbs"),
         convertHandler.getUnit("3lbs")
-      ) % converters["lbsTokg"]
+      )
     );
   });
 
   test("ConvertHandler.convert should correctly convert kg to lbs", () => {
     assert.equal(
-      0,
+      8.81850,
       convertHandler.convert(
         convertHandler.getNum("4kg"),
         convertHandler.getUnit("4kg")
-      ) % (1/converters["lbsTokg"])
+      )
     );
   });
 
